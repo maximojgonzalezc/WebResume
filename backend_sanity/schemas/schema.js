@@ -10,9 +10,10 @@ import product from './product'
 import article from './article'
 import link from './link'
 import simpleBlockContent from './simpleBlockContent'
+import testimonials from './testimonials'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   name: 'default',
-  types: schemaTypes.concat([simpleBlockContent, siteSettings, pet, human, product, article, link]),
+  types: schemaTypes.concat([simpleBlockContent, siteSettings, pet, human, product, article, link, testimonials]),
 })
