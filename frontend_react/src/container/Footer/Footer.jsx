@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import emailjs from 'emailjs-com';
 import { images } from '../../constants';
 import { AppWrap, MotionWrap } from '../../wrapper';
 import { client } from '../../client';
@@ -17,6 +17,15 @@ const Footer = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const sendEmail = (contact) => {
+    emailjs.send(process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_TEMPLATE_ID, contact, process.env.REACT_APP_USER_ID)
+      .then((result) => {
+        console.log(result.text);
+      }, (error) => {
+        console.log(error.text);
+      });
+  };
+
   const handleSubmit = () => {
     setLoading(true);
 
@@ -26,6 +35,8 @@ const Footer = () => {
       email: formData.email,
       message: formData.message,
     };
+
+    sendEmail(contact);
 
     client.create(contact)
       .then(() => {
